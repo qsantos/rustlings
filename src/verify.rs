@@ -15,9 +15,10 @@ pub fn verify<'a>(
 ) -> Result<(), &'a Exercise> {
     let (mut num_done, total) = progress;
     let bar = ProgressBar::new(total as u64);
-    bar.set_style(ProgressStyle::default_bar()
-        .template("Progress: [{bar:60.green/red}] {pos}/{len} {msg}")
-        .progress_chars("#>-")
+    bar.set_style(
+        ProgressStyle::default_bar()
+            .template("Progress: [{bar:60.green/red}] {pos}/{len} {msg}")
+            .progress_chars("#>-"),
     );
     bar.set_position(num_done as u64);
     bar.set_message(format!("({:.1} %)", 0.));
@@ -122,9 +123,9 @@ fn compile_and_test(exercise: &Exercise, run_mode: RunMode, verbose: bool) -> Re
 
 // Compile the given Exercise and return an object with information
 // about the state of the compilation
-fn compile<'a, 'b>(
+fn compile<'a>(
     exercise: &'a Exercise,
-    progress_bar: &'b ProgressBar,
+    progress_bar: &ProgressBar,
 ) -> Result<CompiledExercise<'a>, ()> {
     let compilation_result = exercise.compile();
 
